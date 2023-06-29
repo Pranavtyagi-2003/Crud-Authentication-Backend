@@ -1,22 +1,19 @@
 import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:[true,"Please Enter Name"],
-    },
-    email:{
-        type:String,
-        required:[true,"Please Enter Email"],
-    },
-    phone:{
-        type:String,
-        required:[true,"Please Enter Phone"],
-    },
-    address:{
-        type:String,
-        required:[true,"Please Enter Address"],
-    }
-})
-const UserModel = mongoose.model("user", UserSchema)
-module.exports = UserModel
+const schema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Please enter your name"],
+  },
+  email: {
+    type: String,
+    required: [true, "Please enter your email"],
+  },
+  password:{
+    type: String,
+    required: [true, "Please enter your password"],
+    minLength: [6, "Password must be at least 6 characters"],
+  },
+});
+
+export const User = mongoose.model("User",schema)

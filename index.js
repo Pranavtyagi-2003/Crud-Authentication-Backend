@@ -1,29 +1,13 @@
-import express from 'express'
-import { connectdb } from './database.js';
-const UserModel = require("./models/user")
-import cors from 'cors'
+import app from "./app.js";
+import {connectDB} from './database.js'
 
-
-const app = express();
 const port = 5000;
-connectdb();
-app.use(express.json());
-app.use(cors());
+connectDB();
+
 app.get("/",(req,res)=>{
-    res.send("<h1>Hello m aagya</h1>")
+  res.write("<h1>Server Working</h1>");
 })
 
-app.use(express.urlencoded({extended: true}))
-
-app.post("/api/user", (req, res)=>{
-    const SaveUser = new UserModel(req.body)
-    SaveUser.save((error, savedUser)=>{
-        if(error) throw error
-        res.json(savedUser)
-    })
-})
-
-
-app.listen(port,()=>{
-    console.log(`Server running at ${port}`);
-})
+app.listen(port, () => {
+  console.log(`Server is running on port : ${port}`);
+});
